@@ -73,6 +73,28 @@ class DesktopDrop {
         );
         _offset = null;
         break;
+      case "performOperation_macos":
+        assert(_offset != null);
+        final paths = (call.arguments as List).cast<Map<dynamic, dynamic>>();
+
+        final files = paths.map((e) {
+          var path = e["path"] as String;
+          return XFile(path);
+        }).toList();
+
+        final bookmarks = paths.map((e) {
+          return e["bookmark"] as Uint8List;
+        }).toList();
+
+        _notifyEvent(
+          DropDoneEvent(
+            location: _offset ?? Offset.zero,
+            files: files,
+            extraMacosBookmark: bookmarks,
+          ),
+        );
+        _offset = null;
+        break;
       case "performOperation_linux":
         // gtk notify 'exit' before 'performOperation'.
         assert(_offset == null);
