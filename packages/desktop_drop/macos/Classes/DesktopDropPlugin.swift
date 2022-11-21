@@ -109,7 +109,15 @@ class DropTarget: NSView {
             if let error = error {
               debugPrint("error: \(error)")
             } else {
-              items.append(["path":fileURL.path, "bookmark": try! fileURL.bookmarkData()])
+              var item  : [String: Any] = ["path":fileURL.path];
+              do {
+                item["bookmark"] = try fileURL.bookmarkData(
+                options: [ .withSecurityScope ],
+                includingResourceValuesForKeys: nil,
+                relativeTo: nil)
+              }catch{ 
+              }
+              items.append(item)
             }
             group.leave()
           }
@@ -122,7 +130,15 @@ class DropTarget: NSView {
 
     pasteboardObjects?.forEach({ item in
       if let fileURL = item as? URL {
-         items.append(["path":fileURL.path, "bookmark": try! fileURL.bookmarkData()])
+          var item : [String: Any] = ["path":fileURL.path];
+            do {
+              item["bookmark"] = try fileURL.bookmarkData(
+              options: [ .withSecurityScope ],
+              includingResourceValuesForKeys: nil,
+              relativeTo: nil)
+            }catch{ 
+            }
+            items.append(item)
         return
       }
     })

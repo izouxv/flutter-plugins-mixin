@@ -28,7 +28,7 @@ class DropUpdateEvent extends DropEvent {
 
 class DropDoneEvent extends DropEvent {
   final List<XFile> files;
-  final List<Uint8List>? extraMacosBookmark; //macos : Uint8List//
+  final List<Uint8List?>? extraMacosBookmark; //macos : Uint8List//
 
   DropDoneEvent({
     required Offset location,

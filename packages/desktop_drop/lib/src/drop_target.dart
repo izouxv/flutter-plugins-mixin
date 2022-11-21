@@ -16,7 +16,7 @@ class DropDoneDetails {
     this.extraMacosBookmark,
   });
 
-  final List<Uint8List>? extraMacosBookmark;
+  final List<Uint8List?>? extraMacosBookmark;
   final List<XFile> files;
   final Offset localPosition;
   final Offset globalPosition;

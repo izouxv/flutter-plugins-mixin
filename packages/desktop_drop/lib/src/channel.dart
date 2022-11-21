@@ -83,6 +83,7 @@ class DesktopDrop {
         }).toList();
 
         final bookmarks = paths.map((e) {
+          if (e["bookmark"] == null) return null;
           return e["bookmark"] as Uint8List;
         }).toList();
 
